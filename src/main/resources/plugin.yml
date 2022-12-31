@@ -1,0 +1,7 @@
+name: RedisTab
+version: '${project.version}'
+main: ru.powerlands.tab.RedisTab
+commands:
+  list:
+    aliases:
+      - online
