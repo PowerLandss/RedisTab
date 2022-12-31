@@ -17,7 +17,6 @@ public final class RedisTab extends JavaPlugin {
     static RedisTab Main;
     static RedisLoader redis;
     final RedisSubject sub = new RedisSubject();
-    static LuckPerms luckPerms;
 
     @Override
     public void onEnable() {
@@ -29,8 +28,6 @@ public final class RedisTab extends JavaPlugin {
                 getConfig().getInt("redis.port")
         );
         redis.connect();
-
-        luckPerms = LuckPermsProvider.get();
 
         jedisPubSub();
         bukkit();
@@ -80,9 +77,6 @@ public final class RedisTab extends JavaPlugin {
         return redis;
     }
 
-    public static LuckPerms getLuckPerms() {
-        return luckPerms;
-    }
 
     @Override
     public void onDisable() {
