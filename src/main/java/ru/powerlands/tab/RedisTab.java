@@ -14,15 +14,14 @@ import ru.powerlands.tab.redis.RedisTask;
 
 public final class RedisTab extends JavaPlugin {
 
-    static RedisTab Main;
-    static RedisLoader redis;
-    final RedisSubject sub = new RedisSubject();
+    private static RedisTab Main;
+    private RedisLoader redis;
+    private RedisSubject sub = new RedisSubject();
 
     @Override
     public void onEnable() {
         Main = this;
         saveDefaultConfig();
-
         redis = new RedisLoader(
                 getConfig().getString("redis.address"),
                 getConfig().getInt("redis.port")
@@ -33,11 +32,11 @@ public final class RedisTab extends JavaPlugin {
         bukkit();
         load();
     }
-    void bukkit() {
+    public void bukkit() {
         getServer().getPluginCommand("list").setExecutor(new CommandList());
         getServer().getPluginManager().registerEvents(new Events(), this);
     }
-    void load() {
+    public void load() {
         RedisTask redisTask = new RedisTask("");
         for(Player p : Bukkit.getOnlinePlayers()) {
             if(p != null) {
@@ -48,7 +47,7 @@ public final class RedisTab extends JavaPlugin {
     }
 
 
-    void jedisPubSub(){
+    public void jedisPubSub(){
         Runnable runnable = () -> {
             JedisPubSub jedisPubSub = new JedisPubSub() {
                 @Override
@@ -73,12 +72,7 @@ public final class RedisTab extends JavaPlugin {
     public static RedisTab getMain() {
         return Main;
     }
-    public static RedisLoader getRedis() {
+    public RedisLoader getRedis() {
         return redis;
-    }
-
-
-    @Override
-    public void onDisable() {
     }
 }
